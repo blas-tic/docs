@@ -7,31 +7,33 @@
 ## BLAZOR WEBASSEMBLY
 	dotnet new blazorwasm -o BlazorApp
 
-# PROYECTO WEB API DE DOTNET 9
+# Proyecto WEB API de DOTNET 9
 	dotnet new webapi -o NombreProyecto -controllers -uld -f x.x
 
 		-uld (sólo si vas a usar autenticación para que cree las migraciones para sqlserver en vez de sqlite que es el defecto)
 		-f (8.0, 9.0, 7.0) por defecto la última que tengas instalada
 
-# PROYECTO WEBAPP CON INTERACCION WEBASSEMBLY
+# Proyecto WEBAPP con interacción WEBASSEMBLY
 	dotnet new blazor -o BlazorSignalRApp -int WebAssembly -ai False
 
-# PROYECTO WEBAPP CON INTERACCION SERVER E Interactivity Location = Per page/component
+# Proyecto WEBAPP con interacción SERVER Ee Interactivity Location = Per page/component
 	dotnet new blazor -o BlazorServerCRUD -int Server -ai False
 	
-# AÑADIR UN PROYECTO LIBRERÍA A UN PROYECTO EXISTENTE
+# Añadir un Proyecto LIBRERÍA A un Proyecto EXISTENTE
 	dotnet new classlib -o BlazorWASMCrud.Shared
 
-# CREAR UNA SOLUCIÓN VACÍA
+# Crear una solución vacía
 	Con el directorio ya creado:
- 	dotnet new sln   --> crea una solución vacía con el mismo nombre del directorio
+
+ 	`dotnet new sln`   --> crea una solución vacía con el mismo nombre del directorio
+
   	Sin tener aun directorio
-   	dotnet new sln --output MySolution  --> crea el directorio MySolution y en él una solución vacía con el mismo nombre del directorio
+   	`dotnet new sln --output MySolution`  --> crea el directorio MySolution y en él una solución vacía con el mismo nombre del directorio
     
-# AÑADIR UN PROYECTO A UNA SOLUCION EXISTENTE. En el directorio donde está el .sln:
+# Añadir un proyecto a una Solución Existente. En el directorio donde está el .sln:
 	dotnet sln add BlazorWASMCrud.Shared
 	
-# PROYECTO WEBAPP CON IDENTITY, CON INTERACCION SERVER E Interactivity Location = Per page/component
+# Proyecto WEBAPP con IDENTITY, con INTERACCION SERVER e Interactivity Location = Per page/component
 	dotnet new blazor -o BlazorIdentity -int Server -au Individual -ai False
 	dotnet new blazor -o BlazorIdentity -int Server -au Individual -ai False -uld 
 		// uld significa usar LocalDB que como es parte de SQLSERVER puede que construya mejor las migrations para usar SQLSERVER,
@@ -44,29 +46,30 @@ https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-build
 # LIMPIAR obj Y bin
 dotnet clean
 
-# GENERAR UN CERTIFICADO AUTOFIRMADO PARA UTILIZAR https EN DESARROLLO
+# Generar un certificado autofirmado para usar https en desarrollo
 dotnet dev-certs<br>
 	https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-dev-certs
 	
-# EJECUTAR LA APLICACION
+# EJECUTAR LA APLICACION:
+
 dotnet watch
 
-	## EJECUTARLA POR https:
+## EJECUTARLA POR https:
 	dotnet watch -lp https
 	
-# BUSCAR LOS NOMBRES DE LAS PLANTILLAS EN nuget.org
+# Buscar los nombres de las plantillas en  nuget.org
 dotnet new search <TEMPLATE_NAME>	
 
-# AÑADIR UNA HERRAMIENTA
+# AÑADIR una herramienta
 dotnet tool install <PACKAGE_NAME> -g|--global
 dotnet tool install --global dotnet-ef
 dotnet tool update --global dotnet-ef
 
-# CHULETA SOBRE LAS PLANTILLAS BLAZOR
+# Chuleta sobre las plantillas BLAZOR
 https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-new-sdk-templates#blazor
 
-# AÑADIR UN PAQUETE NUGET
-dotnet add package <NOMBRE-PAQUETE>
+# Añadir un paquete Nuget
+dotnet add package [NOMBRE-PAQUETE]<br>
 	https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-add-package	
  ```
 	dotnet add package Microsoft.EntityFrameworkCore --version x.x.x
@@ -76,44 +79,50 @@ dotnet add package <NOMBRE-PAQUETE>
 	dotnet add package Microsoft.EntityFrameworkCore.Sqlite --version x.x.x
 	dotnet add package System.Net.Http.Json --version x.x.x
 ```
-# LISTAR LOS PAQUETES QUE CONTIENE LA SOLUCION
+# Listar los paquetes que contiene la solución
 dotnet list package	
-# ELIMINAR UN PAQUETE
-dotnet remove [PROJECT] package <PACKAGE_NAME>
+
+# Eliminar un paquete
+dotnet remove [PROJECT] package <PACKAGE_NAME><br>
 	https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-remove-package
 
-# CADENA DE CONEXION A SQLSERVER EN PODMAN **NO FUNCIONA**
-"Server=localhost,1460;Database=VideoGameDB;User Id=sa;Password=Passw0rd;Trusted_Connection=true;Encrypt=false "
-	#OJO: Trusted_Connection=true; IMPLICA WINDOWS E IDENTIFICACION KERBEROS. EN LINUX NO FUNCIONA, Y NO PUEDE USARSE CON USER/PASS
+# Cadena de conexión a SQLSERVER en PODMAN **NO FUNCIONA**
+"Server=localhost,1460;Database=VideoGameDB;User Id=sa;Password=Passw0rd;Trusted_Connection=true;Encrypt=false "<br>
+	**OJO: Trusted_Connection=true; IMPLICA WINDOWS E IDENTIFICACION KERBEROS. EN LINUX NO FUNCIONA, Y NO PUEDE USARSE CON USER/PASS**
 	
-# CADENA DE CONEXION A SQLSERVER EN PODMAN _**FUNCIONA**_
+# Cadena de conexión a SQLSERVER en PODMAN === _**FUNCIONA**_ ===
 "Server=localhost,1460;Database=VideoGameDB;User Id=sa;Password=Passw0rd;Encrypt=false "
 
-# CADENA DE CONEXION A SQLSERVER DIRECTAMENTE INSTALADO EN UBUNTU _**FUNCIONA**_
+# Cadena de conexión a SQLSERVER directamente instalado en Ubuntu === _**FUNCIONA**_ ===
 "Server=localhost;Database=BlazorPurchaseOrders;User Id=sa;Password=tr#P3zoide;Encrypt=false"
 
-# CADENA DE CONEXION A SQLITE
+# Cadena de conexión a SQLITE
 "DefaultConnection": "Data Source=database.db"
 	
-# CREAR MIGRACIONES
+# Crear Migraciones
 dotnet ef migrations add Initial
 
-# EJECUTAR MIGRACIONES
+# Ejecutar Migraciones en la b.d.
 dotnet ef database update
 	
 	
-# CREAR UN COMPONENTE RAZOR
+# Crear un componente Razor
 dotnet new razorcomponent -n Todo -o Components/Pages
 
 # BLAZOR SECURITY
-	# CREAR UN PROYECTO CON AUTENTICACIÓN
+
+## Crear un proyecto con autenticación
+
 	dotnet new blazor -int Server -au Individual -o AcademiaWebapp
-	# DOCUMENTACION SOBRE IDENTITY Y BLAZOR SECURITY
+## Documentación sobre identity y Blazor Security
 	https://learn.microsoft.com/es-es/aspnet/core/blazor/security/?view=aspnetcore-9.0&tabs=net-cli
 	
 
-# AGREGAR IDENTITY A UN PROYECTO QUE SE CREÓ INICIALMENTE SIN ELLO
+## Agregar IDENTITY a un proyecto que se creó inicialmente sin ello
+
 dotnet add package Microsoft.AspNetCore.Identity.EntityFrameworkCore
+
+----
 
 # CURSO YOUTUBE DE PATRICK GOD SOBRE BLAZOR IDENTITY (NET8)
 https://www.youtube.com/watch?v=tNzSuwV62Lw
@@ -125,22 +134,24 @@ https://www.youtube.com/watch?v=RBVIclt4sOo&t=263s
 # CÓDIGO CON EJEMPLOS
 https://github.com/bigboybamo/BlazorCRUDApp
 
-========================================================================================
+---
 # SCAFFOLDING  (base de datos previa existe y lo que quieres es crear los modelos y el dbcontext)
-# Requisitos previos:
-	# el controlador para la b.d. en cuestion: Microsoft.EntityFrameworkCore.SqlServer
-	# el diseñador: Microsoft.EntityFrameworkCore.Design
-========================================================================================
+## Requisitos previos:
+* el controlador para la b.d. en cuestion: Microsoft.EntityFrameworkCore.SqlServer
+* el diseñador: Microsoft.EntityFrameworkCore.Design
 
-dotnet ef dbcontext scaffold Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Chinook" Microsoft.EntityFrameworkCore.SqlServer
-dotnet ef dbcontext scaffold "Server=localhost;Database=testdb;User Id=sa;Password=tr#P3zoide;Encrypt=false" Microsoft.EntityFrameworkCore.SqlServer --context-dir Data --output-dir Models
+---
 
-dotnet ef dbcontext scaffold [host, userid, pass, encrypt, etc.] [driver] 
+`dotnet ef dbcontext scaffold Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Chinook" Microsoft.EntityFrameworkCore.SqlServer`
+
+`dotnet ef dbcontext scaffold "Server=localhost;Database=testdb;User Id=sa;Password=tr#P3zoide;Encrypt=false" Microsoft.EntityFrameworkCore.SqlServer --context-dir Data --output-dir Models`
+
+`dotnet ef dbcontext scaffold [host, userid, pass, encrypt, etc.] [driver] 
 	--context-dir Data
-	--output-dir Models
+	--output-dir Models`
 
-PROBADO:
-dotnet ef dbcontext scaffold "Server=localhost;Database=testdb;User Id=sa;Password=tr#P3zoide;Encrypt=false" Microsoft.EntityFrameworkCore.SqlServer --context-dir Data --output-dir Models
+***PROBADO:***
+`dotnet ef dbcontext scaffold "Server=localhost;Database=testdb;User Id=sa;Password=tr#P3zoide;Encrypt=false" Microsoft.EntityFrameworkCore.SqlServer --context-dir Data --output-dir Models`
 
 	ESTO FUNCIONA:
 	dotnet new blazor -o PruebaManyToMany
@@ -152,22 +163,21 @@ dotnet ef dbcontext scaffold "Server=localhost;Database=testdb;User Id=sa;Passwo
 	  dotnet ef dbcontext scaffold "Server=localhost;Database=testdb;User Id=sa;Password=tr#P3zoide;Encrypt=false" Microsoft.EntityFrameworkCore.SqlServer --context-dir Data --output-dir Models
 	PERO: NO ME GUSTAN LOS MODELOS QUE HA CREADO... SEGUIR ESTUDIANDO A VER QUÉ ENCUENTRO
 	
-##########################################################################################################################################################	
-# OTRO TIPO DE SCAFFOLDING: CREAR PÁGINAS RAZOR PARA CRUD A PARTIR DE LOS MODELOS:
-# REQUISITO
-			dotnet tool install -g dotnet-aspnet-codegenerator
+---
+
+# Otro tipo de  SCAFFOLDING: Crear páginas Razor para CRUD a partir de los modelos:
+## REQUISITO
+			`dotnet tool install -g dotnet-aspnet-codegenerator`
 			https://aka.ms/dotnet-core-applaunch?framework=Microsoft.NETCore.App&framework_version=9.0.0&arch=x64&rid=ubuntu.24.04-x64&os=linuxmint.22
 
-		dotnet aspnet-codegenerator blazor CRUD -dbProvider sqlite -dc BlazorWebAppMovies.Data.BlazorWebAppMoviesContext -m Movie -outDir Components/Pages
+		`dotnet aspnet-codegenerator blazor CRUD -dbProvider sqlite -dc BlazorWebAppMovies.Data.BlazorWebAppMoviesContext -m Movie -outDir Components/Pages`
 
-			SIN PROBAR AUN. A VER CÓMO SE LAS APAÑA CON LAS RELACIONES
-		dotnet aspnet-codegenerator blazor CRUD -dbProvider sqlserver -dc PruebaManyToMany.Data.TestdbContext -m Post -outDir Components/Pages
+		**Esto no funciona en Linux**: pide la dotnet 8 y yo tengo la 9. Aparentemente no son compatibles
 
-######## NO FUNCIONA #####################################################################################################################################	
-		Da un error de incompatibilidad entre dotnet 8 y dotnet9 que parece que no pueden convivir en linuxmint
-##########################################################################################################################################################	
+---
 
 # PROYECTO BLAZOR WASM CRUD
+
 	Según el vídeo de Patrick God: https://www.youtube.com/watch?v=AKiGGtBj1go
 	Crea un tercer proyecto .Shared que en realidad es una biblioteca normal (creo: se podría elegir también biblioteca Blazor, pero no sé cuál es la diferencia)
 	## OJO ## el proyecto biblioteca se crea con --> dotnet new classlib -o BlazorWASMCrud.Shared
@@ -178,10 +188,9 @@ dotnet ef dbcontext scaffold "Server=localhost;Database=testdb;User Id=sa;Passwo
 	En ese proyecto mete un directorio Entities, con una clase para el modelo
 	Crea las migraciones y las aplica con database update. Todo OK
 	
-	La división server/client/shared es un maremagnum que me parece innecesario y que es muy fácil equivocarse y bloquear el proyecto... creo que me quedo
+	> La división server/client/shared es un maremagnum que me parece innecesario y que es muy fácil equivocarse y bloquear el proyecto... creo que me quedo
 	con InteractiveServer
 	
-	minuto 34:16
 	
 	
 # TUTORIAL BLAZOR & MAUI DE JUAN ZULOAGA
@@ -189,8 +198,11 @@ dotnet ef dbcontext scaffold "Server=localhost;Database=testdb;User Id=sa;Passwo
 		y las cuelga en Youtube. Explica bastante bien, aunque son videos largos
 		Incluye también documentos de Google Docs con la teoría y el paso-a-paso en sus 
 		playlists.
+
 https://youtube.com/playlist?list=PLuEZQoW9bRnRHpzGBYKWfW01AFB_-Qgn1&si=Jfo_YBWgjVxSVlNM
-# ANÁLOGO PERO PARA UN TALLER DE VEHÍCULOS
+
+## Análogo pero para un taller de vehículos
 https://www.youtube.com/playlist?list=PLuEZQoW9bRnSXVHOk8WLQVGX3VBTKQKj7	
-# LO MISMO PARA UNA GESTIÓN DE PEDIDOS CON BLAZOR Y .NET 7
+
+## Lo mismo para una gestión de pedidos con blazor y .net 7
 https://www.youtube.com/playlist?list=PLuEZQoW9bRnRBThyGs208ZMrCYBRTvIg2
