@@ -22,9 +22,9 @@ Este comando generará clases C# de modelos basadas en el esquema de base de dat
 
 ## Ejemplo con dos tablas unidas por una relacion uno-a-muchos, incluyendo páginas blazor para explotar los modelos.
 
-Claro, aquí hay un ejemplo con dos tablas, `Authors` y `Books`, donde los autores tienen una relación uno-a-muchos con los libros.
+Ejemplo con dos tablas, `Authors` y `Books`, donde los autores tienen una relación uno-a-muchos con los libros.
 
-Primero, genere los modelos utilizando el comando `dotnet ef dbcontext scaffold` proporcionado anteriormente. Los modelos generados podrían verse así:
+Primero, se generan los modelos utilizando el comando `dotnet ef dbcontext scaffold` proporcionado anteriormente. Los modelos generados podrían verse así:
 
 `Author.cs`
 
