@@ -60,7 +60,7 @@ Después de generar los modelos, puede crear una página Blazor para mostrar los
 
 `Pages/DatabaseComponent.razor`
 
-```razor
+```html
 @page "/databasecomponent"
 @inject YourProject.Models.AuthorDbContext DbContext
 
