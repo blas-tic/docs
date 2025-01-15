@@ -3,11 +3,12 @@
 ## BLAZOR WEBAPP
 
 	dotnet new blazor -o BlazorApp
-	## BLAZOR WEBASSEMBLY
+ 
+## BLAZOR WEBASSEMBLY
 	dotnet new blazorwasm -o BlazorApp
 
 # PROYECTO WEB API DE DOTNET 9
-`	dotnet new webapi -o NombreProyecto -controllers -uld -f x.x`
+	dotnet new webapi -o NombreProyecto -controllers -uld -f x.x
 
 		-uld (sólo si vas a usar autenticación para que cree las migraciones para sqlserver en vez de sqlite que es el defecto)
 		-f (8.0, 9.0, 7.0) por defecto la última que tengas instalada
@@ -20,8 +21,14 @@
 	
 # AÑADIR UN PROYECTO LIBRERÍA A UN PROYECTO EXISTENTE
 	dotnet new classlib -o BlazorWASMCrud.Shared
-	
-# AÑADIR UN PROYECTO A UNA SOLUCION EXISTENTE. EN EL DIRECTORIO DONDE ESTÁ EL .sln:
+
+# CREAR UNA SOLUCIÓN VACÍA
+	Con el directorio ya creado:
+ 	dotnet new sln   --> crea una solución vacía con el mismo nombre del directorio
+  	Sin tener aun directorio
+   	dotnet new sln --output MySolution  --> crea el directorio MySolution y en él una solución vacía con el mismo nombre del directorio
+    
+# AÑADIR UN PROYECTO A UNA SOLUCION EXISTENTE. En el directorio donde está el .sln:
 	dotnet sln add BlazorWASMCrud.Shared
 	
 # PROYECTO WEBAPP CON IDENTITY, CON INTERACCION SERVER E Interactivity Location = Per page/component
@@ -29,21 +36,21 @@
 	dotnet new blazor -o BlazorIdentity -int Server -au Individual -ai False -uld 
 		// uld significa usar LocalDB que como es parte de SQLSERVER puede que construya mejor las migrations para usar SQLSERVER,
 		// pq por defecto los genera para SQLite      
-		==== COMPROBADO: con uld genera codigo de migración válido para SQLSERVER =====
 	
 # COMPILAR Y CONSTRUIR LA APLICACION
-dotnet build
-	https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-build
+dotnet build<br>
+https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-build
 		
 # LIMPIAR obj Y bin
 dotnet clean
 
 # GENERAR UN CERTIFICADO AUTOFIRMADO PARA UTILIZAR https EN DESARROLLO
-dotnet dev-certs
+dotnet dev-certs<br>
 	https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-dev-certs
 	
 # EJECUTAR LA APLICACION
 dotnet watch
+
 	## EJECUTARLA POR https:
 	dotnet watch -lp https
 	
@@ -61,27 +68,28 @@ https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-new-sdk-templates#bla
 # AÑADIR UN PAQUETE NUGET
 dotnet add package <NOMBRE-PAQUETE>
 	https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-add-package	
+ ```
 	dotnet add package Microsoft.EntityFrameworkCore --version x.x.x
 	dotnet add package Microsoft.EntityFrameworkCore.Tools --version x.x.x // necesario si quieres usar migrations en un CodeFirst approach
 	dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version x.x.x
 	dotnet add package Microsoft.EntityFrameworkCore.Design --version x.x.x // necesario para scaffolding
 	dotnet add package Microsoft.EntityFrameworkCore.Sqlite --version x.x.x
 	dotnet add package System.Net.Http.Json --version x.x.x
-	
+```
 # LISTAR LOS PAQUETES QUE CONTIENE LA SOLUCION
 dotnet list package	
 # ELIMINAR UN PAQUETE
-dotnet remove [<PROJECT>] package <PACKAGE_NAME>
+dotnet remove [PROJECT] package <PACKAGE_NAME>
 	https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-remove-package
 
-# CADENA DE CONEXION A SQLSERVER EN PODMAN ---NO FUNCIONA--
+# CADENA DE CONEXION A SQLSERVER EN PODMAN **NO FUNCIONA**
 "Server=localhost,1460;Database=VideoGameDB;User Id=sa;Password=Passw0rd;Trusted_Connection=true;Encrypt=false "
 	#OJO: Trusted_Connection=true; IMPLICA WINDOWS E IDENTIFICACION KERBEROS. EN LINUX NO FUNCIONA, Y NO PUEDE USARSE CON USER/PASS
 	
-# CADENA DE CONEXION A SQLSERVER EN PODMAN ===FUNCIONA===
+# CADENA DE CONEXION A SQLSERVER EN PODMAN _**FUNCIONA**_
 "Server=localhost,1460;Database=VideoGameDB;User Id=sa;Password=Passw0rd;Encrypt=false "
 
-# CADENA DE CONEXION A SQLSERVER DIRECTAMENTE INSTALADO EN UBUNTU ===FUNCIONA===
+# CADENA DE CONEXION A SQLSERVER DIRECTAMENTE INSTALADO EN UBUNTU _**FUNCIONA**_
 "Server=localhost;Database=BlazorPurchaseOrders;User Id=sa;Password=tr#P3zoide;Encrypt=false"
 
 # CADENA DE CONEXION A SQLITE
