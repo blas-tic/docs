@@ -61,18 +61,25 @@ dotnet watch
 dotnet new search <TEMPLATE_NAME>	
 
 # AÑADIR una herramienta
+
+```console
 dotnet tool install <PACKAGE_NAME> -g|--global
+```
+
+```console
 dotnet tool install --global dotnet-ef
 dotnet tool update --global dotnet-ef
+```
 
 # Chuleta sobre las plantillas BLAZOR
-https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-new-sdk-templates#blazor
+[Enlace](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-new-sdk-templates#blazor)
 
 # Añadir un paquete Nuget
 dotnet add package [NOMBRE-PAQUETE]<br>
-	https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-add-package	
- ```
-	dotnet add package Microsoft.EntityFrameworkCore --version x.x.x
+	[Enlace](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-add-package)
+
+ ```console
+ 	dotnet add package Microsoft.EntityFrameworkCore --version x.x.x
 	dotnet add package Microsoft.EntityFrameworkCore.Tools --version x.x.x // necesario si quieres usar migrations en un CodeFirst approach
 	dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version x.x.x
 	dotnet add package Microsoft.EntityFrameworkCore.Design --version x.x.x // necesario para scaffolding
@@ -80,51 +87,53 @@ dotnet add package [NOMBRE-PAQUETE]<br>
 	dotnet add package System.Net.Http.Json --version x.x.x
 ```
 # Listar los paquetes que contiene la solución
-dotnet list package	
+`dotnet list package`	
 
 # Eliminar un paquete
-dotnet remove [PROJECT] package <PACKAGE_NAME><br>
-	https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-remove-package
+`dotnet remove [PROJECT] package <PACKAGE_NAME>`<br>
+	[Enlace](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-remove-package)
 
 # Cadena de conexión a SQLSERVER en PODMAN **NO FUNCIONA**
-"Server=localhost,1460;Database=VideoGameDB;User Id=sa;Password=Passw0rd;Trusted_Connection=true;Encrypt=false "<br>
+`"Server=localhost,1460;Database=VideoGameDB;User Id=sa;Password=Passw0rd;Trusted_Connection=true;Encrypt=false"`<br>
 	**OJO: Trusted_Connection=true; IMPLICA WINDOWS E IDENTIFICACION KERBEROS. EN LINUX NO FUNCIONA, Y NO PUEDE USARSE CON USER/PASS**
 	
 # Cadena de conexión a SQLSERVER en PODMAN === _**FUNCIONA**_ ===
-"Server=localhost,1460;Database=VideoGameDB;User Id=sa;Password=Passw0rd;Encrypt=false "
+`"Server=localhost,1460;Database=VideoGameDB;User Id=sa;Password=Passw0rd;Encrypt=false"`
 
 # Cadena de conexión a SQLSERVER directamente instalado en Ubuntu === _**FUNCIONA**_ ===
-"Server=localhost;Database=BlazorPurchaseOrders;User Id=sa;Password=tr#P3zoide;Encrypt=false"
+`"Server=localhost;Database=BlazorPurchaseOrders;User Id=sa;Password=tr#P3zoide;Encrypt=false"`
 
 # Cadena de conexión a SQLITE
-"DefaultConnection": "Data Source=database.db"
+`"DefaultConnection": "Data Source=database.db"`
 	
 # Crear Migraciones
-dotnet ef migrations add Initial
+`dotnet ef migrations add Initial`
 
 # Ejecutar Migraciones en la b.d.
-dotnet ef database update
+`dotnet ef database update`
 	
 	
 # Crear un componente Razor
-dotnet new razorcomponent -n Todo -o Components/Pages
+`dotnet new razorcomponent -n Todo -o Components/Pages`
 
 # BLAZOR SECURITY
 
 ## Crear un proyecto con autenticación
 
-	dotnet new blazor -int Server -au Individual -o AcademiaWebapp
+	`dotnet new blazor -int Server -au Individual -o AcademiaWebapp`
+
 ## Documentación sobre identity y Blazor Security
-	https://learn.microsoft.com/es-es/aspnet/core/blazor/security/?view=aspnetcore-9.0&tabs=net-cli
+
+[Enlace](https://learn.microsoft.com/es-es/aspnet/core/blazor/security/?view=aspnetcore-9.0&tabs=net-cli)
 	
 
 ## Agregar IDENTITY a un proyecto que se creó inicialmente sin ello
 
-dotnet add package Microsoft.AspNetCore.Identity.EntityFrameworkCore
+`dotnet add package Microsoft.AspNetCore.Identity.EntityFrameworkCore`
 
 ----
 
-# CURSO YOUTUBE DE PATRICK GOD SOBRE BLAZOR IDENTITY (NET8)
+## CURSO YOUTUBE DE PATRICK GOD SOBRE BLAZOR IDENTITY (NET8)
 https://www.youtube.com/watch?v=tNzSuwV62Lw
 
 
@@ -151,9 +160,12 @@ https://github.com/bigboybamo/BlazorCRUDApp
 	--output-dir Models`
 
 ***PROBADO:***
+
 `dotnet ef dbcontext scaffold "Server=localhost;Database=testdb;User Id=sa;Password=tr#P3zoide;Encrypt=false" Microsoft.EntityFrameworkCore.SqlServer --context-dir Data --output-dir Models`
 
-	ESTO FUNCIONA:
+**ESTO FUNCIONA:**
+
+```console
 	dotnet new blazor -o PruebaManyToMany
 	  cd PruebaManyToMany/
 	  code .
@@ -161,48 +173,57 @@ https://github.com/bigboybamo/BlazorCRUDApp
 	  dotnet add package Microsoft.EntityFrameworkCore.SqlServer
 	  dotnet add package Microsoft.EntityFrameworkCore.Design
 	  dotnet ef dbcontext scaffold "Server=localhost;Database=testdb;User Id=sa;Password=tr#P3zoide;Encrypt=false" Microsoft.EntityFrameworkCore.SqlServer --context-dir Data --output-dir Models
-	PERO: NO ME GUSTAN LOS MODELOS QUE HA CREADO... SEGUIR ESTUDIANDO A VER QUÉ ENCUENTRO
+```
+**PERO:** NO ME GUSTAN LOS MODELOS QUE HA CREADO... SEGUIR ESTUDIANDO A VER QUÉ ENCUENTRO
 	
 ---
 
 # Otro tipo de  SCAFFOLDING: Crear páginas Razor para CRUD a partir de los modelos:
 ## REQUISITO
-			`dotnet tool install -g dotnet-aspnet-codegenerator`
-			https://aka.ms/dotnet-core-applaunch?framework=Microsoft.NETCore.App&framework_version=9.0.0&arch=x64&rid=ubuntu.24.04-x64&os=linuxmint.22
 
-		`dotnet aspnet-codegenerator blazor CRUD -dbProvider sqlite -dc BlazorWebAppMovies.Data.BlazorWebAppMoviesContext -m Movie -outDir Components/Pages`
+`dotnet tool install -g dotnet-aspnet-codegenerator`<br>
+[Enlace](https://aka.ms/dotnet-core-applaunch?framework=Microsoft.NETCore.App&framework_version=9.0.0&arch=x64&rid=ubuntu.24.04-x64&os=linuxmint.22)
 
-		**Esto no funciona en Linux**: pide la dotnet 8 y yo tengo la 9. Aparentemente no son compatibles
+
+```console
+dotnet aspnet-codegenerator blazor CRUD -dbProvider sqlite -dc BlazorWebAppMovies.Data.BlazorWebAppMoviesContext -m Movie -outDir Components/Pages
+```
+
+**Esto no funciona en Linux**: pide la dotnet 8 y yo tengo la 9. Aparentemente no son compatibles
 
 ---
 
 # PROYECTO BLAZOR WASM CRUD
 
 	Según el vídeo de Patrick God: https://www.youtube.com/watch?v=AKiGGtBj1go
-	Crea un tercer proyecto .Shared que en realidad es una biblioteca normal (creo: se podría elegir también biblioteca Blazor, pero no sé cuál es la diferencia)
-	## OJO ## el proyecto biblioteca se crea con --> dotnet new classlib -o BlazorWASMCrud.Shared
-			  pero además hay que ejecutar, en el directorio donde esté el .sln --> dotnet sln add BlazorWASMCrud.Shared
-			  y además, hay que añadir la referencia al nuevo proyecto en el .csproj del principal, en este caso BlazorWASMCrud.csproj
-				--> <ProjectReference Include="..\BlazorWASMCrud.Shared\BlazorWASMCrud.Shared.csproj" /> 
-			  porque si no, no lo reconoce y no encuentra las clases ni nada... no funciona y te lo marca en rojo
-	En ese proyecto mete un directorio Entities, con una clase para el modelo
-	Crea las migraciones y las aplica con database update. Todo OK
-	
-	> La división server/client/shared es un maremagnum que me parece innecesario y que es muy fácil equivocarse y bloquear el proyecto... creo que me quedo
-	con InteractiveServer
-	
-	
+
+Crea un tercer proyecto .Shared que en realidad es una biblioteca normal (creo: se podría elegir también biblioteca Blazor, pero no sé cuál es la diferencia)
+
+**OJO** el proyecto biblioteca se crea con --> `dotnet new classlib -o BlazorWASMCrud.Shared` <br>
+pero además hay que ejecutar, en el directorio donde esté el .sln --> `dotnet sln add BlazorWASMCrud.Shared` <br>
+y además, hay que añadir la referencia al nuevo proyecto en el .csproj del principal, en este caso `BlazorWASMCrud.csproj`
+
+```csharp
+<ProjectReference Include="..\BlazorWASMCrud.Shared\BlazorWASMCrud.Shared.csproj" />
+``` 
+porque si no, no lo reconoce y no encuentra las clases ni nada... no funciona y te lo marca en rojo.
+
+En ese proyecto mete un directorio Entities, con una clase para el modelo.
+Crea las migraciones y las aplica con database update. Todo OK
+
+>  La división server/client/shared es un maremagnum que me parece innecesario y que es muy fácil equivocarse y bloquear el proyecto... creo que me quedo	con InteractiveServer
 	
 # TUTORIAL BLAZOR & MAUI DE JUAN ZULOAGA
-		Este tío es un profesor de FP de Colombia que graba sus clases presenciales
-		y las cuelga en Youtube. Explica bastante bien, aunque son videos largos
-		Incluye también documentos de Google Docs con la teoría y el paso-a-paso en sus 
-		playlists.
 
-https://youtube.com/playlist?list=PLuEZQoW9bRnRHpzGBYKWfW01AFB_-Qgn1&si=Jfo_YBWgjVxSVlNM
+Este tío es un profesor de FP de Colombia que graba sus clases presenciales
+y las cuelga en Youtube. Explica bastante bien, aunque son videos largos
+Incluye también documentos de Google Docs con la teoría y el paso-a-paso en sus 
+playlists.
+
+[Ver en Youtube](https://youtube.com/playlist?list=PLuEZQoW9bRnRHpzGBYKWfW01AFB_-Qgn1&si=Jfo_YBWgjVxSVlNM)
 
 ## Análogo pero para un taller de vehículos
-https://www.youtube.com/playlist?list=PLuEZQoW9bRnSXVHOk8WLQVGX3VBTKQKj7	
+[Ver en Youtube](https://www.youtube.com/playlist?list=PLuEZQoW9bRnSXVHOk8WLQVGX3VBTKQKj7)	
 
 ## Lo mismo para una gestión de pedidos con blazor y .net 7
-https://www.youtube.com/playlist?list=PLuEZQoW9bRnRBThyGs208ZMrCYBRTvIg2
+[Ver en Youtube](https://www.youtube.com/playlist?list=PLuEZQoW9bRnRBThyGs208ZMrCYBRTvIg2)
