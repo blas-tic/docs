@@ -1,9 +1,8 @@
 # docs
+
 Documentación en general sobre desarrollo, diversos lenguajes.
 
-## Chuleta Database First
-https://github.com/blas-tic/docs/blob/main/CHULETA-DBFIRST.md
+## [Chuleta Database First](https://blas-tic.github.io/docs/CHULETA-DBFIRST)
 
-## Chuleta Dotnet CLI
-https://github.com/blas-tic/docs/blob/main/CHULETA-DOTNET.md
+## [Chuleta Dotnet CLI](https://blas-tic.github.io/docs/CHULETA-DOTNET)
 
